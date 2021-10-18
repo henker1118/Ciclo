@@ -1,0 +1,31 @@
+package com.thomas.gimnasio.dao;
+
+import java.util.List;
+import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import com.thomas.gimnasio.entities.Message;
+import com.thomas.gimnasio.entities.MessageCrud;
+
+
+@Repository
+public class MessageRepository {
+	@Autowired
+	private MessageCrud messageCrudRepository;
+
+	public List<Message> getAll() {
+		return (List<Message>) messageCrudRepository.findAll();
+	};
+
+	public Optional<Message> getMessage(int id) {
+		return messageCrudRepository.findById(id);
+	};
+
+	public Message save(Message message) {
+		return messageCrudRepository.save(message);
+	};
+	/*
+	 * public void delete(Category category )
+	 * {categoryCrudRepository.delete(category);};
+	 */
+}
