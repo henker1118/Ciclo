@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.http.HttpStatus;
 
 import com.thomas.gimnasio.entities.Category;
 import com.thomas.gimnasio.services.CategoryService;
@@ -36,6 +38,7 @@ public class CategoryController {
 
 //    @CrossOrigin(origins = "http://132.226.240.254")
 	@PostMapping("/save")
+	@ResponseStatus(HttpStatus.CREATED)
 	public Category save(@RequestBody Category category) {
 		return categoryService.save(category);
 	};
