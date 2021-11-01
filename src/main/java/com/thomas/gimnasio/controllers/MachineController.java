@@ -15,10 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.thomas.gimnasio.entities.Category;
 import com.thomas.gimnasio.entities.Machine;
 import com.thomas.gimnasio.services.MachineService;
-
-
 
 @RestController
 @RequestMapping("/api/Machine")
@@ -44,12 +43,16 @@ public class MachineController {
 	public Machine save(@RequestBody Machine machine) {
 		return machineService.save(machine);
 	};
-	/*
-	 * @PutMapping("/update") public Custome update(@RequestBody Custome custome)
-	 * {return customeService.update(custome);};
-	 * 
-	 * @DeleteMapping("/{id}") public void delete(@PathVariable("id") int customeId)
-	 * { customeService.deleteCustome(customeId); }
-	 * 
-	 */
+
+	@PutMapping("/update")
+	@ResponseStatus(HttpStatus.CREATED)
+	public Machine update(@RequestBody Machine machine) {
+		return machineService.update(machine);
+	};
+
+	@DeleteMapping("/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public boolean delete(@PathVariable("id") int machineId) {
+		return machineService.deleteMachine(machineId);
+	};
 }

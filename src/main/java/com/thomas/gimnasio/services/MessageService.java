@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.thomas.gimnasio.dao.MessageRepository;
+import com.thomas.gimnasio.entities.Category;
 import com.thomas.gimnasio.entities.Message;
 
 @Service
@@ -31,6 +32,23 @@ public class MessageService {
 				return message;
 			}
 		}
+	}
 
+	public Message update(Message message) {
+		if (message.getIdMessage() != null) {
+			Optional<Message> co = messageRepository.getMessage(message.getIdMessage());
+			if (co.isEmpty()) {
+				return messageRepository.save(message);
+			}
+		}
+		return message;
+	}
+
+	public boolean deleteMessage(int id) {
+		Boolean result = getMessage(id).map(message -> {
+			messageRepository.delete(message);
+			return true;
+		}).orElse(false);
+		return result;
 	}
 }

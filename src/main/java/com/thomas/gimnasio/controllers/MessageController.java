@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.thomas.gimnasio.entities.Category;
 import com.thomas.gimnasio.entities.Message;
 import com.thomas.gimnasio.services.MessageService;
 
@@ -44,12 +45,16 @@ public class MessageController {
 	public Message save(@RequestBody Message message) {
 		return messageService.save(message);
 	};
-	/*
-	 * @PutMapping("/update") public Custome update(@RequestBody Custome custome)
-	 * {return customeService.update(custome);};
-	 * 
-	 * @DeleteMapping("/{id}") public void delete(@PathVariable("id") int customeId)
-	 * { customeService.deleteCustome(customeId); }
-	 * 
-	 */
+	
+	@PutMapping("/update")
+	@ResponseStatus(HttpStatus.CREATED)
+	public Message update(@RequestBody Message message) {
+		return messageService.update(message);
+	};
+
+	@DeleteMapping("/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public boolean delete(@PathVariable("id") int messageId) {
+		return messageService.deleteMessage(messageId);
+	};
 }

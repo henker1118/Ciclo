@@ -23,8 +23,8 @@ public class ClientRepository {
 	public Client save(Client client) {
 		return clientCrudRepository.save(client);
 	};
-	/*
-	 * public void delete(Category category )
-	 * {categoryCrudRepository.delete(category);};
-	 */
+
+	public void delete(Client client) {
+		clientCrudRepository.delete(client);
+	};
 }

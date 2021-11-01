@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.thomas.gimnasio.entities.Category;
 import com.thomas.gimnasio.entities.Client;
 import com.thomas.gimnasio.services.ClientService;
 
@@ -42,12 +43,16 @@ public class ClientController {
 	public Client save(@RequestBody Client client) {
 		return clientService.save(client);
 	};
-	/*
-	 * @PutMapping("/update") public Custome update(@RequestBody Custome custome)
-	 * {return customeService.update(custome);};
-	 * 
-	 * @DeleteMapping("/{id}") public void delete(@PathVariable("id") int customeId)
-	 * { customeService.deleteCustome(customeId); }
-	 * 
-	 */
+	
+	@PutMapping("/update")
+	@ResponseStatus(HttpStatus.CREATED)
+	public Client update(@RequestBody Client client) {
+		return clientService.update(client);
+	};
+
+	@DeleteMapping("/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public boolean delete(@PathVariable("id") int clientId) {
+		return clientService.deleteClient(clientId);
+	};
 }

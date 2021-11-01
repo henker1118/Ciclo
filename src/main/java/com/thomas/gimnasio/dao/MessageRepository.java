@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import com.thomas.gimnasio.entities.Message;
 import com.thomas.gimnasio.entities.MessageCrud;
 
-
 @Repository
 public class MessageRepository {
 	@Autowired
@@ -24,8 +23,9 @@ public class MessageRepository {
 	public Message save(Message message) {
 		return messageCrudRepository.save(message);
 	};
-	/*
-	 * public void delete(Category category )
-	 * {categoryCrudRepository.delete(category);};
-	 */
+
+	public void delete(Message message) {
+		messageCrudRepository.delete(message);
+	};
+
 }

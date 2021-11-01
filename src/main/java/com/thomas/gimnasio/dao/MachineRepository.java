@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import com.thomas.gimnasio.entities.Machine;
 import com.thomas.gimnasio.entities.MachineCrud;
 
-
 @Repository
 public class MachineRepository {
 	@Autowired
@@ -24,8 +23,9 @@ public class MachineRepository {
 	public Machine save(Machine machines) {
 		return machineCrudRepository.save(machines);
 	};
-	/*
-	 * public void delete(Category category )
-	 * {categoryCrudRepository.delete(category);};
-	 */
+
+	public void delete(Machine machine) {
+		machineCrudRepository.delete(machine);
+	};
+
 }

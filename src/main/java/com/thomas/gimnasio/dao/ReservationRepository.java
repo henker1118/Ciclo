@@ -23,8 +23,8 @@ public class ReservationRepository {
 	public Reservation save(Reservation reservation) {
 		return reservationCrudRepository.save(reservation);
 	};
-	/*
-	 * public void delete(Category category )
-	 * {categoryCrudRepository.delete(category);};
-	 */
+
+	public void delete(Reservation reservation) {
+		reservationCrudRepository.delete(reservation);
+	};
 }

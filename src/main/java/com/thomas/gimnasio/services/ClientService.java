@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.thomas.gimnasio.dao.ClientRepository;
+import com.thomas.gimnasio.entities.Category;
 import com.thomas.gimnasio.entities.Client;
 
 @Service
@@ -31,5 +32,23 @@ public class ClientService {
 				return client;
 			}
 		}
+	}
+	
+	public Client update(Client client) {
+		if (client.getIdClient() != null) {
+			Optional<Client> co = clientRepository.getClient(client.getIdClient());
+			if (co.isEmpty()) {
+				return clientRepository.save(client);
+			}
+		}
+		return client;
+	}
+
+	public boolean deleteClient(int id) {
+		Boolean result = getClient(id).map(category -> {
+			clientRepository.delete(category);
+			return true;
+		}).orElse(false);
+		return result;
 	}
 }

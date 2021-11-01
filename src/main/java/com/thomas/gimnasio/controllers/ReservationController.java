@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.thomas.gimnasio.entities.Category;
 import com.thomas.gimnasio.entities.Reservation;
 import com.thomas.gimnasio.services.ReservationService;
 
@@ -41,12 +43,16 @@ public class ReservationController {
 	public Reservation save(@RequestBody Reservation reservation) {
 		return reservationService.save(reservation);
 	};
-	/*
-	 * @PutMapping("/update") public Custome update(@RequestBody Custome custome)
-	 * {return customeService.update(custome);};
-	 * 
-	 * @DeleteMapping("/{id}") public void delete(@PathVariable("id") int customeId)
-	 * { customeService.deleteCustome(customeId); }
-	 * 
-	 */
+
+	@PutMapping("/update")
+	@ResponseStatus(HttpStatus.CREATED)
+	public Reservation update(@RequestBody Reservation reservation) {
+		return reservationService.update(reservation);
+	};
+
+	@DeleteMapping("/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public boolean delete(@PathVariable("id") int reservationId) {
+		return reservationService.deleteReservation(reservationId);
+	};
 }
