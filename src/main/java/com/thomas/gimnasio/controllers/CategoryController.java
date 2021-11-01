@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import com.thomas.gimnasio.entities.Category;
 import com.thomas.gimnasio.services.CategoryService;
 
 @RestController
 @RequestMapping("/api/Category")
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
 public class CategoryController {
 	@Autowired
 	private CategoryService categoryService;
