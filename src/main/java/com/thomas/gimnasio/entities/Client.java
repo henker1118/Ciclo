@@ -22,7 +22,7 @@ public class Client implements Serializable {
 	private String email;
 	private String password;
 	private String name;
-	private int age;
+	private Integer age;
 	
 	@OneToMany(cascade = { CascadeType.PERSIST }, mappedBy = "client")
 	@JsonIgnoreProperties("client")
@@ -64,11 +64,11 @@ public class Client implements Serializable {
 		this.name = name;
 	}
 
-	public int getAge() {
+	public Integer getAge() {
 		return age;
 	}
 
-	public void setAge(int age) {
+	public void setAge(Integer age) {
 		this.age = age;
 	}
 
