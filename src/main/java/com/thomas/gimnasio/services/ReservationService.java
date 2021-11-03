@@ -5,8 +5,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.thomas.gimnasio.dao.ReservationRepository;
-import com.thomas.gimnasio.entities.Category;
 import com.thomas.gimnasio.entities.Reservation;
+import com.thomas.gimnasio.reports.CountClient;
+import com.thomas.gimnasio.reports.ReservationStatus;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 @Service
 public class ReservationService {
@@ -64,5 +69,29 @@ public class ReservationService {
 			return true;
 		}).orElse(false);
 		return result;
+	}
+
+	public ReservationStatus getReservationStatusReport() {
+		List<Reservation> completed = reservationRepository.getReservationByStatus("completed");
+		List<Reservation> cancelled = reservationRepository.getReservationByStatus("cancelled");
+		return new ReservationStatus(completed.size(), cancelled.size());
+	}
+
+	public List<Reservation> getReservationPeriod(String dateOne, String dateTwo) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			Date startDate = dateFormat.parse(dateOne);
+			Date endDate = dateFormat.parse(dateTwo);
+			if (startDate.before(endDate)) {
+				return reservationRepository.getReservationPeriod(startDate, endDate);
+			}
+		} catch (Exception exception) {
+			exception.printStackTrace();
+		}
+		return new ArrayList<>();
+	}
+
+	public List<CountClient> getTopClients() {
+		return reservationRepository.getTopClient();
 	}
 }

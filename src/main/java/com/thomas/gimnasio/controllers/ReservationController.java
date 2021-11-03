@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.thomas.gimnasio.entities.Category;
 import com.thomas.gimnasio.entities.Reservation;
+import com.thomas.gimnasio.reports.CountClient;
+import com.thomas.gimnasio.reports.ReservationStatus;
 import com.thomas.gimnasio.services.ReservationService;
 
 @RestController
@@ -56,5 +56,20 @@ public class ReservationController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public boolean delete(@PathVariable("id") int reservationId) {
 		return reservationService.deleteReservation(reservationId);
-	};
+	}
+	
+	@GetMapping("/report-status")
+    public ReservationStatus getReservationsStatusReport(){
+        return reservationService.getReservationStatusReport();
+    }
+
+    @GetMapping("/report-dates/{dateOne}/{dateTwo}")
+    public List<Reservation> getReservationReportDate(@PathVariable("dateOne") String dateOne, @PathVariable("dateTwo") String dateTwo){
+        return reservationService.getReservationPeriod(dateOne,dateTwo);
+    }
+
+    @GetMapping("/report-clients")
+    public List<CountClient> getClients(){
+        return reservationService.getTopClients();
+    }
 }
